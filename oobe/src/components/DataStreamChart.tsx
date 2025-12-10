@@ -2,63 +2,22 @@ import ReactApexChart from "react-apexcharts";
 import { type ApexOptions } from "apexcharts";
 import { Card, Row, Col } from "react-bootstrap";
 import "./DataStreamChart.scss";
-import { FormattedMessage } from "react-intl";
 import { Activity } from "react";
+
+interface DataPoint {
+  x: number;
+  y: number;
+}
 
 type DataStreamChartProps = {
   chartType: "area" | "line";
-  pageType: "smart" | "medical" | "industrial";
+  leftTitle?: string;
+  rightTitle?: string;
+  leftSubtitle?: string;
+  rightSubtitle?: string;
+  chartData1?: DataPoint[];
+  chartData2?: DataPoint[];
 };
-
-const someData = [
-  { x: 1, y: 30 },
-  { x: 2.2, y: 25 },
-  { x: 3.4, y: 38 },
-  { x: 4.6, y: 28 },
-  { x: 5, y: 22 },
-  { x: 6.5, y: 37 },
-  { x: 7.7, y: 21 },
-  { x: 8.9, y: 32 },
-  { x: 9.1, y: 40 },
-  { x: 10.4, y: 25 },
-  { x: 11.6, y: 33 },
-  { x: 12.2, y: 31 },
-  { x: 13.3, y: 29 },
-  { x: 14.5, y: 35 },
-  { x: 15.7, y: 27 },
-  { x: 16.8, y: 39 },
-  { x: 17.9, y: 23 },
-  { x: 18, y: 26 },
-  { x: 19.2, y: 34 },
-  { x: 20.4, y: 30 },
-  { x: 21.5, y: 28 },
-  { x: 22.7, y: 36 },
-  { x: 23.9, y: 24 },
-];
-
-const someData2 = [
-  { x: 1, y: 20 },
-  { x: 2.2, y: 15 },
-  { x: 3.4, y: 18 },
-  { x: 4.6, y: 12 },
-  { x: 5, y: 22 },
-  { x: 6.5, y: 27 },
-  { x: 7.7, y: 11 },
-  { x: 8.9, y: 22 },
-  { x: 9.1, y: 30 },
-  { x: 10.4, y: 35 },
-  { x: 11.6, y: 40 },
-  { x: 12.2, y: 21 },
-  { x: 13.3, y: 19 },
-  { x: 14.5, y: 25 },
-  { x: 15.7, y: 17 },
-  { x: 16.8, y: 29 },
-  { x: 17.9, y: 13 },
-  { x: 18, y: 16 },
-  { x: 19.2, y: 24 },
-  { x: 20.4, y: 20 },
-  { x: 21.5, y: 18 },
-];
 
 type ChartInfo = {
   curveType: "straight" | "smooth" | "stepline" | "linestep" | "monotoneCubic";
@@ -83,64 +42,25 @@ const areaChartInfo: ChartInfo = {
   color2: "#00C2FF",
 };
 
-type pageInfo = {
-  leftTitle: string;
-  rightTitle?: string;
-  leftSubtitle: string;
-  rightSubtitle?: string;
-};
-
-const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
+const DataStreamChart = ({
+  chartType,
+  leftTitle,
+  rightTitle,
+  leftSubtitle,
+  rightSubtitle,
+  chartData1,
+  chartData2,
+}: DataStreamChartProps) => {
   const series: ApexAxisChartSeries = [
     {
       name: "Data Set 1 (High Range)",
-      data: someData,
+      data: chartData1 || [],
     },
     {
       name: "Data Set 2 (Low Range)",
-      data: someData2,
+      data: chartData2 || [],
     },
   ];
-
-  const smartPageInfo: pageInfo = {
-    leftTitle: chartType === "line" ? "POWER SENT TO GRID" : "PLANT STATUS",
-    leftSubtitle: chartType === "line" ? "1.9 kW" : "PRODUCING",
-    rightSubtitle: "5.2 kW",
-  };
-
-  const medicalPageInfo: pageInfo = {
-    leftTitle: chartType === "line" ? "TUBE CURRENT" : "TUBE STATUS",
-    leftSubtitle: chartType === "line" ? "29.4 kW" : "STANDBY",
-    rightSubtitle: "88°C",
-  };
-
-  const industrialPageInfo: pageInfo = {
-    leftTitle: chartType === "line" ? "ENERGY COSUMPTION" : "SUCTION PRESSURE",
-    rightTitle: chartType === "line" ? "" : "DISCHARGE PRESSURE",
-    leftSubtitle: chartType === "line" ? "351.2 kWH" : "2.5 bar",
-    rightSubtitle: chartType === "line" ? "" : "10.1 bar",
-  };
-
-  const leftTitle =
-    pageType === "smart"
-      ? smartPageInfo.leftTitle
-      : pageType === "medical"
-        ? medicalPageInfo.leftTitle
-        : industrialPageInfo.leftTitle;
-
-  const leftSubtitle =
-    pageType === "smart"
-      ? smartPageInfo.leftSubtitle
-      : pageType === "medical"
-        ? medicalPageInfo.leftSubtitle
-        : industrialPageInfo.leftSubtitle;
-
-  const rightSubtitle =
-    pageType === "smart"
-      ? smartPageInfo.rightSubtitle
-      : pageType === "medical"
-        ? medicalPageInfo.rightSubtitle
-        : industrialPageInfo.rightSubtitle;
 
   const baseChartOptions: ApexOptions = {
     chart: {
@@ -169,7 +89,7 @@ const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
       gradient: {
         shadeIntensity: 1,
         opacityFrom: 0.7,
-        opacityTo: 0.9,
+        opacityTo: 0.3,
         stops: [0, 90, 100],
       },
     },
@@ -178,16 +98,23 @@ const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
       labels: {
         style: { colors: "#fff", fontSize: "12px" },
         datetimeFormatter: { hour: "HH:mm" },
+        formatter: (val) => {
+          const date = new Date(val);
+          return date.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        },
       },
       axisTicks: { show: false },
       axisBorder: { show: false },
     },
-    yaxis: {
-      show: false,
-      min: 0,
-      max: 40,
+    yaxis: { show: false },
+    tooltip: {
+      theme: "dark",
+      x: { format: "HH:mm:ss" },
+      y: { formatter: (val) => val.toFixed(1) },
     },
-    tooltip: { theme: "dark", x: { format: "HH:mm:ss" } },
     legend: { show: false },
     dataLabels: { enabled: false },
     markers: {
@@ -204,29 +131,21 @@ const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
         : [areaChartInfo.color, areaChartInfo.color2],
   };
 
+  function capitalizeFirstLetter(val: string | undefined | object) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+  }
+
   return (
     <Card className="production-graph-card rounded-5 border-secondary border-2">
       <Card.Body className="d-flex flex-column">
         <Card.Header className="d-flex justify-content-between align-items-center mb-1">
           <Card.Title className="fw-bold fs-5 mb-1 ms-1">
-            <FormattedMessage
-              id="dataStreamChart.leftTitle"
-              defaultMessage={leftTitle}
-            />
+            {leftTitle}
           </Card.Title>
 
-          <Activity
-            mode={
-              pageType === "industrial" && chartType === "area"
-                ? "visible"
-                : "hidden"
-            }
-          >
+          <Activity mode={rightTitle === undefined ? "hidden" : "visible"}>
             <Card.Title className="fw-bold fs-5 mb-1 ms-5">
-              <FormattedMessage
-                id="dataStreamChart.leftTitle"
-                defaultMessage={industrialPageInfo.rightTitle}
-              />
+              {rightTitle}
             </Card.Title>
           </Activity>
         </Card.Header>
@@ -234,37 +153,20 @@ const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
         <div className="usage-section d-flex flex-column">
           <Row className="subtitle-container align-items-center justify-content-between">
             <Col xs="auto" className="d-flex align-items-center ms-3 gap-3">
-              <Activity
-                mode={
-                  pageType === "industrial" && chartType === "area"
-                    ? "visible"
-                    : "hidden"
-                }
-              >
+              <Activity mode={chartData2 === undefined ? "hidden" : "visible"}>
                 <div className="dot dot-default" />
               </Activity>
               <span className="fw-semibold fs-1">
-                <FormattedMessage
-                  id="components.DataStreamChart.chartSubtitle"
-                  defaultMessage={
-                    pageType === "industrial"
-                      ? industrialPageInfo.leftSubtitle
-                      : leftSubtitle
-                  }
-                />
+                {leftSubtitle || "Loading..."}
               </span>
             </Col>
             <Activity mode={chartType === "line" ? "hidden" : "visible"}>
               <Col xs="auto" className="d-flex align-items-center gap-3 me-3">
                 <div
-                  className={`dot ${pageType === "industrial" ? "dot-discharge-pressure" : "dot-default"}`}
+                  className={`dot ${chartData2 !== undefined ? "dot-discharge-pressure" : "dot-default"}`}
                 />
                 <small className="right-subtitle fw-semibold fs-1">
-                  <FormattedMessage
-                    id="components.DataStreamChart.realTimeUsage"
-                    defaultMessage="{usage}"
-                    values={{ usage: rightSubtitle }}
-                  />
+                  {rightSubtitle || "Loading..."}
                 </small>
               </Col>
             </Activity>
@@ -272,9 +174,14 @@ const DataStreamChart = ({ chartType, pageType }: DataStreamChartProps) => {
           <ReactApexChart
             options={{ ...baseChartOptions }}
             series={
-              pageType === "industrial" && chartType === "area"
+              chartData2 !== undefined && chartType === "area"
                 ? series
-                : [{ name: "Data", data: someData }]
+                : [
+                    {
+                      name: capitalizeFirstLetter(leftTitle),
+                      data: chartData1 || [],
+                    },
+                  ]
             }
             type={chartType}
             height={150}

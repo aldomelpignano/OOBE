@@ -2,41 +2,25 @@ import ReactApexChart from "react-apexcharts";
 import { type ApexOptions } from "apexcharts";
 import { Card, Row } from "react-bootstrap";
 import "./PropertyChart.scss";
-import { FormattedMessage } from "react-intl";
 
-const someData = [
-  { x: 1, y: 30 },
-  { x: 2.2, y: 25 },
-  { x: 3.4, y: 38 },
-  { x: 4.6, y: 28 },
-  { x: 5, y: 22 },
-  { x: 6.5, y: 37 },
-  { x: 7.7, y: 21 },
-  { x: 8.9, y: 32 },
-  { x: 9.1, y: 40 },
-  { x: 10.4, y: 25 },
-  { x: 11.6, y: 33 },
-  { x: 12.2, y: 31 },
-  { x: 13.3, y: 29 },
-  { x: 14.5, y: 35 },
-  { x: 15.7, y: 27 },
-  { x: 16.8, y: 39 },
-  { x: 17.9, y: 23 },
-  { x: 18, y: 26 },
-  { x: 19.2, y: 34 },
-  { x: 20.4, y: 30 },
-  { x: 21.5, y: 28 },
-  { x: 22.7, y: 36 },
-  { x: 23.9, y: 24 },
-];
+interface DataPoint {
+  x: number;
+  y: number;
+}
 
 type PropertyChartProps = {
   chartName: string;
   chartColor?: "blue" | "orange" | "green";
-  data: string;
+  chartData: DataPoint[];
+  realTimeData?: string;
 };
 
-const PropertyChart = ({ chartName, chartColor, data }: PropertyChartProps) => {
+const PropertyChart = ({
+  chartName,
+  chartColor,
+  chartData,
+  realTimeData,
+}: PropertyChartProps) => {
   const baseChartOptions: ApexOptions = {
     chart: {
       toolbar: { show: false },
@@ -64,11 +48,7 @@ const PropertyChart = ({ chartName, chartColor, data }: PropertyChartProps) => {
       axisTicks: { show: false },
       axisBorder: { show: false },
     },
-    yaxis: {
-      show: false,
-      min: 0,
-      max: 40,
-    },
+    yaxis: { show: false },
     tooltip: { enabled: false },
     legend: { show: false },
     dataLabels: { enabled: false },
@@ -80,25 +60,26 @@ const PropertyChart = ({ chartName, chartColor, data }: PropertyChartProps) => {
           : ["#0FFF00"],
   };
 
+  function capitalizeFirstLetter(val: string | undefined) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+  }
+
   return (
     <Card className="production-graph-card rounded-5 border-secondary border-2">
       <Card.Body className="d-flex flex-column">
         <Row className="flex-grow-1 justify-content-center align-items-center">
           <Card.Title className="fw-bold fs-5 mb-1 ms-1 justify-content-center text-center">
-            <FormattedMessage
-              id="dataStreamChart.chartName"
-              defaultMessage={chartName}
-            />
+            {chartName}
           </Card.Title>
-          <Card.Text className="fw-semiBold fs-2 mb-4 ms-1 justify-content-center text-center">
-            <FormattedMessage id="dataStreamChart.data" defaultMessage={data} />
+          <Card.Text className="fw-bold fs-2 mb-4 ms-1 justify-content-center text-center">
+            {capitalizeFirstLetter(realTimeData) || "Loading..."}
           </Card.Text>
         </Row>
 
         <div className="usage-section d-flex flex-column">
           <ReactApexChart
             options={{ ...baseChartOptions }}
-            series={[{ name: "Data", data: someData }]}
+            series={[{ name: chartName, data: chartData }]}
             type="area"
             height={142}
           />

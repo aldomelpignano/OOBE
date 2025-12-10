@@ -11,6 +11,8 @@ import SmartBuilding from "./pages/SmartBuilding";
 import Medical from "./pages/Medical";
 import IndustrialAutomation from "./pages/IndustrialAutomation";
 import SmartAlertManagement from "./pages/SmartAlertManagement";
+import MedicalAlertManagement from "./pages/MedicalAlertManagement";
+import IndustrialAlertManagement from "./pages/IndustrialAlertManagement";
 
 function App() {
   const apiClient = useMemo(() => {
@@ -36,7 +38,15 @@ function App() {
             <Route path="/industrial" element={<IndustrialAutomation />} />
             <Route
               path="/smart-alert-management"
-              element={<SmartAlertManagement />}
+              element={<SmartAlertManagement apiClient={apiClient} />}
+            />
+            <Route
+              path="medical-alert-management"
+              element={<MedicalAlertManagement apiClient={apiClient} />}
+            />
+            <Route
+              path="industrial-alert-management"
+              element={<IndustrialAlertManagement apiClient={apiClient} />}
             />
             <Route
               path="/hub"
