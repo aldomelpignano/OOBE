@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import VideoPlayerTestTool from "./pages/VideoPlayerTestTool";
 import RGBPatternTestTool from "./pages/RGBPatternTestTool";
 import SampleIntegrityCheck from "./pages/SampleIntegrityCheck";
+import SmartClinical from "./pages/SmartClinical";
 
 const HIDE_SIDEBAR_ROUTES = [
   "/medical-alert-management",
@@ -27,6 +28,7 @@ const HIDE_SIDEBAR_ROUTES = [
   "/industrial",
   "/rgb-pattern-test-tool",
   "/sample-integrity-check",
+  "/smart-clinical",
 ];
 
 function App() {
@@ -72,6 +74,10 @@ function App() {
             <Route
               path="/sample-integrity-check"
               element={<SampleIntegrityCheck />}
+            />
+            <Route
+              path="/smart-clinical"
+              element={<SmartClinical apiClient={apiClient} />}
             />
             <Route
               path="/hub"

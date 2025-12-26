@@ -37,21 +37,23 @@ const Medical = () => {
 
       <div className="cards-wrapper-medical">
         <Col>
-          <CardComponent
-            icon={cardiology}
-            title={
-              <FormattedMessage
-                id="pages.Medical.smartClinicalRecord.title"
-                defaultMessage="Smart Clinical Record"
-              />
-            }
-            description={
-              <FormattedMessage
-                id="pages.Medical.smartClinicalRecord.desc"
-                defaultMessage="Access patient data and request info and updates."
-              />
-            }
-          />
+          <NavLink to="/smart-clinical" className="nav-link">
+            <CardComponent
+              icon={cardiology}
+              title={
+                <FormattedMessage
+                  id="pages.Medical.smartClinicalRecord.title"
+                  defaultMessage="Smart Clinical Record"
+                />
+              }
+              description={
+                <FormattedMessage
+                  id="pages.Medical.smartClinicalRecord.desc"
+                  defaultMessage="Access patient data and request info and updates."
+                />
+              }
+            />
+          </NavLink>
         </Col>
 
         <Col>

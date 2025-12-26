@@ -51,6 +51,18 @@ export type IndustrialUpdate =
   | { field: "fanSpeed"; value: number }
   | { field: "systemStatus"; value: SystemStatus };
 
+export type SmartClinicalRecordUpdate =
+  | { field: "ecg"; value: number }
+  | { field: "bpm"; value: number }
+  | { field: "systolic"; value: number }
+  | { field: "diastolic"; value: number }
+  | { field: "oxygenSaturation"; value: number };
+
+type SmartClinicalRecordMessage = {
+  view: "smartClinicalRecord";
+  data: SmartClinicalRecordUpdate;
+};
+
 type IndustrialMessage = {
   view: "industrial";
   data: IndustrialUpdate;
@@ -269,6 +281,48 @@ export class APIClient {
     };
   }
 
+  connectSmartClinicalRecord(
+    onUpdate: (update: SmartClinicalRecordUpdate) => void,
+  ) {
+    this.ws = new WebSocket(
+      `${this.config.apiUrl.toString().replace(/\/$/, "")}/ws`.replace(
+        /^http/,
+        "ws",
+      ),
+    );
+
+    this.ws.onopen = () => {
+      console.log("WebSocket connected");
+
+      const subscribeMsg: ClientMessage = {
+        action: "subscribe",
+        views: ["smartClinicalRecord"],
+      };
+
+      this.ws?.send(JSON.stringify(subscribeMsg));
+    };
+
+    this.ws.onmessage = (event) => {
+      try {
+        const msg: SmartClinicalRecordMessage = JSON.parse(event.data);
+
+        if (msg.view === "smartClinicalRecord") {
+          onUpdate(msg.data);
+        }
+      } catch (err) {
+        console.error("Failed to parse WS message:", err);
+      }
+    };
+
+    this.ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
+    };
+
+    this.ws.onclose = () => {
+      console.log("WebSocket closed");
+    };
+  }
+
   disconnectDashboard() {
     this.ws?.close();
     this.ws = undefined;
@@ -285,6 +339,11 @@ export class APIClient {
   }
 
   disconnectIndustrial() {
+    this.ws?.close();
+    this.ws = undefined;
+  }
+
+  disconnectSmartClinicalRecord() {
     this.ws?.close();
     this.ws = undefined;
   }

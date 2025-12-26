@@ -8,6 +8,45 @@
   "SampleIntegrityCheck.anomaliesDetectedMessage": {
     "defaultMessage": "Anomalies detected"
   },
+  "components.BloodCountMedical.birthDate": {
+    "defaultMessage": "Date of Birth:"
+  },
+  "components.BloodCountMedical.collectionDate": {
+    "defaultMessage": "Collection Date:"
+  },
+  "components.BloodCountMedical.gender": {
+    "defaultMessage": "Gender:"
+  },
+  "components.BloodCountMedical.laboratoryReport": {
+    "defaultMessage": "Laboratory Report"
+  },
+  "components.BloodCountMedical.name": {
+    "defaultMessage": "Name:"
+  },
+  "components.BloodCountMedical.patientID": {
+    "defaultMessage": "Patient ID:"
+  },
+  "components.BloodCountMedical.patientInfo": {
+    "defaultMessage": "Patient Information"
+  },
+  "components.BloodCountMedical.referenceRange": {
+    "defaultMessage": "Reference Range"
+  },
+  "components.BloodCountMedical.reportDate": {
+    "defaultMessage": "Report Date:"
+  },
+  "components.BloodCountMedical.result": {
+    "defaultMessage": "Result"
+  },
+  "components.BloodCountMedical.test": {
+    "defaultMessage": "Test"
+  },
+  "components.BloodCountMedical.testType": {
+    "defaultMessage": "Test Type:"
+  },
+  "components.BloodCountMedical.unit": {
+    "defaultMessage": "Unit"
+  },
   "components.DeviceDetailsCard.cpuArchitecture": {
     "defaultMessage": "CPU architecture"
   },
@@ -184,6 +223,39 @@
   },
   "pages.SmartBuilding.smartLobby.title": {
     "defaultMessage": "Smart Lobby"
+  },
+  "pages.SmartClinical.age": {
+    "defaultMessage": "Age:"
+  },
+  "pages.SmartClinical.bloodCountButton": {
+    "defaultMessage": "Blood Count(CBC)"
+  },
+  "pages.SmartClinical.bloodPressure": {
+    "defaultMessage": "Blood Pressure"
+  },
+  "pages.SmartClinical.bloodType": {
+    "defaultMessage": "Blood Type:"
+  },
+  "pages.SmartClinical.height": {
+    "defaultMessage": "Height:"
+  },
+  "pages.SmartClinical.oxygenSaturation": {
+    "defaultMessage": "Oxygen Saturation"
+  },
+  "pages.SmartClinical.physician": {
+    "defaultMessage": "Attending Physician:"
+  },
+  "pages.SmartClinical.realTimeAssistant": {
+    "defaultMessage": "Real time assistant"
+  },
+  "pages.SmartClinical.realTimeAssistantMessage": {
+    "defaultMessage": "Of course, here is the last laboratory test for the patient."
+  },
+  "pages.SmartClinical.reasonForHospitalization": {
+    "defaultMessage": "Reason for hospitalization:"
+  },
+  "pages.SmartClinical.weight": {
+    "defaultMessage": "Weight:"
   },
   "pages.TestingTool.easyTransfer": {
     "defaultMessage": "Easy Image/Video transfer"
