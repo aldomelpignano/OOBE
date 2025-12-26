@@ -19,6 +19,8 @@ import rgbPattern2 from "./rgb_pattern2.jpg";
 import redPills from "./red_pills.png";
 import redPillsScanned from "./red_pills_scanned.png";
 import whitePills from "./white_pills.png";
+import person from "./person.png";
+import expand from "./expand_content.png";
 
 export {
   logo,
@@ -42,4 +44,6 @@ export {
   redPills,
   redPillsScanned,
   whitePills,
+  person,
+  expand,
 };
