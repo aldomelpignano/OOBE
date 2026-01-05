@@ -21,6 +21,9 @@ import redPillsScanned from "./red_pills_scanned.png";
 import whitePills from "./white_pills.png";
 import person from "./person.png";
 import expand from "./expand_content.png";
+import embeddedSBCFront from "./embedded_sbc_front.png";
+import embeddedSBCFrontScanned from "./embedded_sbc_front_scanned.png";
+import embeddedSBCBack from "./embedded_sbc_back.png";
 
 export {
   logo,
@@ -46,4 +49,7 @@ export {
   whitePills,
   person,
   expand,
+  embeddedSBCFront,
+  embeddedSBCFrontScanned,
+  embeddedSBCBack,
 };

@@ -18,6 +18,7 @@ import VideoPlayerTestTool from "./pages/VideoPlayerTestTool";
 import RGBPatternTestTool from "./pages/RGBPatternTestTool";
 import SampleIntegrityCheck from "./pages/SampleIntegrityCheck";
 import SmartClinical from "./pages/SmartClinical";
+import QualityInspection from "./pages/QualityInspection";
 
 const HIDE_SIDEBAR_ROUTES = [
   "/medical-alert-management",
@@ -29,6 +30,7 @@ const HIDE_SIDEBAR_ROUTES = [
   "/rgb-pattern-test-tool",
   "/sample-integrity-check",
   "/smart-clinical",
+  "/quality-inspection",
 ];
 
 function App() {
@@ -71,6 +73,7 @@ function App() {
               path="/rgb-pattern-test-tool"
               element={<RGBPatternTestTool />}
             />
+            <Route path="/quality-inspection" element={<QualityInspection />} />
             <Route
               path="/sample-integrity-check"
               element={<SampleIntegrityCheck />}
