@@ -1,0 +1,29 @@
+{
+  "interface_name": "com.oobe.medical.Reports",
+  "version_major": 0,
+  "version_minor": 1,
+  "type": "datastream",
+  "ownership": "device",
+  "aggregation": "object",
+  "description": "This interface holds the data about the patient medical reports",
+  "mappings": [
+    {
+      "endpoint": "/report/type",
+      "type": "string",
+      "explicit_timestamp": true,
+      "description": "Type of the medical report"
+    },
+    {
+      "endpoint": "/report/facility",
+      "type": "string",
+      "explicit_timestamp": true,
+      "description": "Facility where report has been performed"
+    },
+    {
+      "endpoint": "/report/date",
+      "type": "datetime",
+      "explicit_timestamp": true,
+      "description": "Date when the report was performed"
+    }
+  ]
+}

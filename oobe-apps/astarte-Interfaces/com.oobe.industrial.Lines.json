@@ -1,0 +1,31 @@
+{
+  "interface_name": "com.oobe.industrial.Lines",
+  "version_major": 0,
+  "version_minor": 1,
+  "type": "datastream",
+  "ownership": "device",
+  "aggregation": "object",
+  "description": "This interface holds the data about the patient vital signs",
+  "mappings": [
+    {
+      "endpoint": "/%{line_id}/quality",
+      "type": "boolean",
+      "description": "Boolean indicating piece quality. Value is true if quality is OK and false when quality is KO.",
+      "doc": "[true | false]"
+    },
+    {
+      "endpoint": "/%{line_id}/cycle_start_time",
+      "type": "datetime",
+      "description": "Timestamp indicating when a cycle has started"
+    },
+    {
+      "endpoint": "/%{line_id}/cycle_end_time",
+      "type": "datetime",
+      "description": "Timestamp indicating when a cycle has ended"
+    },
+    {
+      "endpoint": "/%{line_id}/product_name",
+      "type": "string"
+    }
+  ]
+}

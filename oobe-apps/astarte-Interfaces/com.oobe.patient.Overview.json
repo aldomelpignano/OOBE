@@ -1,0 +1,52 @@
+{
+  "interface_name": "com.oobe.patient.Overview",
+  "version_major": 0,
+  "version_minor": 1,
+  "type": "properties",
+  "ownership": "device",
+  "description": "This interface holds the data about the patient",
+  "mappings": [
+    {
+      "endpoint": "/name",
+      "type": "string",
+      "allow_unset": true,
+      "description": "Patient name"
+    },
+    {
+      "endpoint": "/age",
+      "type": "integer",
+      "allow_unset": true,
+      "description": "Patient age"
+    },
+    {
+      "endpoint": "/phisician",
+      "type": "string",
+      "allow_unset": true,
+      "description": "Attending phisician of the patient"
+    },
+    {
+      "endpoint": "/blood_type",
+      "type": "string",
+      "allow_unset": true,
+      "description": "Patient blood type"
+    },
+    {
+      "endpoint": "/height",
+      "type": "double",
+      "allow_unset": true,
+      "description": "Patient height [cm]"
+    },
+    {
+      "endpoint": "/weight",
+      "type": "double",
+      "allow_unset": true,
+      "description": "Patient weight [kg]"
+    },
+    {
+      "endpoint": "/hospitalization_reason",
+      "type": "string",
+      "allow_unset": true,
+      "description": "Detailed reason for hospitalization"
+    }
+  ]
+}
