@@ -1,0 +1,34 @@
+{
+  "interface_name": "com.oobe.camera.History",
+  "version_major": 0,
+  "version_minor": 1,
+  "type": "datastream",
+  "ownership": "device",
+  "aggregation": "object",
+  "description": "This interface holds the data about the patient vital signs",
+  "mappings": [
+    {
+      "endpoint": "/%{camera_id}/event",
+      "type": "string",
+      "description": "Camera event",
+      "doc": "[\"Person detected\" | \"Group of people\" | \"Incident\"]"
+    },
+    {
+      "endpoint": "/%{camera_id}/behavior",
+      "type": "string",
+      "description": "Behavior",
+      "doc": "[\"Entering\" | \"Leaving\" | \"Gathering\"]"
+    },
+    {
+      "endpoint": "/%{camera_id}/datetime",
+      "type": "datetime",
+      "description": "Timestamp of the camera event"
+    },
+    {
+      "endpoint": "/%{camera_id}/number_of_people",
+      "type": "integer",
+      "description": "Number of people detected.",
+      "doc": "Since some event can be \"Group of people\", it is necessary to send the number of people in that group so that aggregate data can be calculated. If the event is Entering or leaving, this value should be 1"
+    }
+  ]
+}

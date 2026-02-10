@@ -1,0 +1,35 @@
+{
+  "interface_name": "com.oobe.vital.Signs",
+  "version_major": 0,
+  "version_minor": 1,
+  "type": "datastream",
+  "ownership": "device",
+  "aggregation": "object",
+  "description": "This interface holds the data about the patient vital signs",
+  "mappings": [
+    {
+      "endpoint": "/vital/ecg",
+      "type": "integer",
+      "explicit_timestamp": true,
+      "description": "Patient ECG value [bpm]"
+    },
+    {
+      "endpoint": "/vital/systolic_pressure",
+      "type": "integer",
+      "explicit_timestamp": true,
+      "description": "Systolic(upper) blood pressure [mmHg]"
+    },
+    {
+      "endpoint": "/vital/diastolic_pressure",
+      "type": "integer",
+      "explicit_timestamp": true,
+      "description": "Diastolic(lower) blood pressure [mmHg]"
+    },
+    {
+      "endpoint": "/vital/oxygen_saturation",
+      "type": "integer",
+      "explicit_timestamp": true,
+      "description": "Patient oxygen saturation level [%]"
+    }
+  ]
+}
