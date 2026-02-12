@@ -7,3 +7,9 @@ export type PatientOverviewData = {
   weight: number;
   hospitalization_reason: string;
 };
+
+export type MedicalReportsData = {
+  type: string;
+  facility: string;
+  date: Date;
+};
