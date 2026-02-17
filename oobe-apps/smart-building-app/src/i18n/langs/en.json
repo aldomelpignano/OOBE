@@ -1,15 +1,6 @@
 {
-  "camera": {
-    "defaultMessage": "Camera ({cameraId})"
-  },
-  "cameraTitle": {
-    "defaultMessage": "{cameraId}"
-  },
-  "history": {
-    "defaultMessage": "History"
-  },
-  "historyTitle": {
-    "defaultMessage": "All Cameras History"
+  "appTitle": {
+    "defaultMessage": "People counter"
   },
   "loading": {
     "defaultMessage": "Loading..."
