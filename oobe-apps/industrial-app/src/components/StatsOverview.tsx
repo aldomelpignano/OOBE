@@ -1,4 +1,5 @@
 import { Row, Col } from "react-bootstrap";
+import { FormattedMessage, useIntl } from "react-intl";
 import { ImageData } from "types";
 
 type StatsOverviewProps = {
@@ -32,8 +33,8 @@ const StatItem = ({ label, val }: { label: string; val: string | number }) => (
 );
 
 const StatsOverview = ({ imagesData, imageIdsCount }: StatsOverviewProps) => {
+  const intl = useIntl();
   const data = Array.isArray(imagesData) ? imagesData : [];
-
   const total = data.length;
   const ok = data.filter((i) => !i.drillError && !i.shortCircuit).length;
   const ko = data.filter((i) => i.drillError > 0 || i.shortCircuit > 0).length;
@@ -45,17 +46,62 @@ const StatsOverview = ({ imagesData, imageIdsCount }: StatsOverviewProps) => {
     <div className="mt-4 mb-5">
       <div className="mb-4">
         <h5 style={{ color: "#2d3436", fontWeight: 700, fontSize: "1rem" }}>
-          Highest Values Recorded
+          <FormattedMessage
+            id="stats.highestValuesRecordedTitle"
+            defaultMessage="Highest Values Recorded"
+          />
         </h5>
       </div>
       <Row className="py-2">
-        <StatItem label="Total Pieces" val={total} />
-        <StatItem label="Quality OK" val={ok} />
-        <StatItem label="Quality KO" val={ko} />
-        <StatItem label="Short Circuit" val={short} />
-        <StatItem label="Drill Error" val={drill} />
-        <StatItem label="Quality Rate" val={rate} />
-        <StatItem label="Unique Images" val={imageIdsCount} />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.totalPieces",
+            defaultMessage: "Total Pieces",
+          })}
+          val={total}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.qualityOk",
+            defaultMessage: "Quality OK",
+          })}
+          val={ok}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.qualityKo",
+            defaultMessage: "Quality KO",
+          })}
+          val={ko}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.shortCircuit",
+            defaultMessage: "Short Circuit",
+          })}
+          val={short}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.drillError",
+            defaultMessage: "Drill Error",
+          })}
+          val={drill}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.qualityRate",
+            defaultMessage: "Quality Rate",
+          })}
+          val={rate}
+        />
+        <StatItem
+          label={intl.formatMessage({
+            id: "stats.uniqueImages",
+            defaultMessage: "Unique Images",
+          })}
+          val={imageIdsCount}
+        />
       </Row>
       <hr className="mt-5 opacity-25" />
     </div>

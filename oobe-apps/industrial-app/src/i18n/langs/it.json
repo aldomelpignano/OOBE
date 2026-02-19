@@ -1,12 +1,48 @@
 {
+  "chart.drillError": {
+    "defaultMessage": "Drill Error (Hole)"
+  },
+  "chart.industrialProduction": {
+    "defaultMessage": "Industrial Production"
+  },
+  "chart.shortCircuit": {
+    "defaultMessage": "Short Circuit (SC)"
+  },
   "defections": {
     "defaultMessage": "Defections"
+  },
+  "fetchData.error": {
+    "defaultMessage": "Failed to fetch data."
   },
   "noData": {
     "defaultMessage": "No data available."
   },
-  "loading": {
-    "defaultMessage": "Loading..."
+  "stats.drillError": {
+    "defaultMessage": "Drill Error"
+  },
+  "stats.highestValuesRecordedTitle": {
+    "defaultMessage": "Highest Values Recorded"
+  },
+  "stats.qualityKo": {
+    "defaultMessage": "Quality KO"
+  },
+  "stats.qualityOk": {
+    "defaultMessage": "Quality OK"
+  },
+  "stats.qualityRate": {
+    "defaultMessage": "Quality Rate"
+  },
+  "stats.shortCircuit": {
+    "defaultMessage": "Short Circuit"
+  },
+  "stats.totalPieces": {
+    "defaultMessage": "Total Pieces"
+  },
+  "stats.uniqueImages": {
+    "defaultMessage": "Unique Images"
+  },
+  "topBar.qualityInspection": {
+    "defaultMessage": "Quality inspection"
   },
   "topProducts": {
     "defaultMessage": "Top Products"

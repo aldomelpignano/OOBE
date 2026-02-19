@@ -1,6 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { useIntl } from "react-intl";
 
 const SHORT_CIRCUIT_COLOR = "#FF0000";
 const DRILL_ERROR_COLOR = "#FFD700";
@@ -19,8 +20,17 @@ type IndustrialBarChartProps = {
 const IndustrialBarChart: React.FC<IndustrialBarChartProps> = ({
   categories,
   series,
-  title = "Industrial Production",
+  title,
 }) => {
+  const intl = useIntl();
+
+  const chartTitle =
+    title ||
+    intl.formatMessage({
+      id: "chart.industrialProduction",
+      defaultMessage: "Industrial Production",
+    });
+
   const options: ApexOptions = {
     chart: {
       type: "bar",
@@ -54,7 +64,7 @@ const IndustrialBarChart: React.FC<IndustrialBarChartProps> = ({
       position: "top",
     },
     title: {
-      text: title,
+      text: chartTitle,
       align: "left",
     },
   };

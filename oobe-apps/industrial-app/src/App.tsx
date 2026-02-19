@@ -55,7 +55,12 @@ const App = ({ astarteUrl, realm, deviceId, token }: AppProps) => {
         setStatsImagesData(allImagesArray);
       })
       .catch(() => {
-        setError("Failed to fetch data.");
+        setError(
+          intl.formatMessage({
+            id: "fetchData.error",
+            defaultMessage: "Failed to fetch data.",
+          }),
+        );
         setImagesData({});
         setStatsImagesData([]);
       })
@@ -72,11 +77,17 @@ const App = ({ astarteUrl, realm, deviceId, token }: AppProps) => {
 
   const series = [
     {
-      name: "Short Circuit (SC)",
+      name: intl.formatMessage({
+        id: "chart.shortCircuit",
+        defaultMessage: "Short Circuit (SC)",
+      }),
       data: categories.map((key) => imagesData[key].shortCircuit),
     },
     {
-      name: "Drill Error (Hole)",
+      name: intl.formatMessage({
+        id: "chart.drillError",
+        defaultMessage: "Drill Error (Hole)",
+      }),
       data: categories.map((key) => imagesData[key].drillError),
     },
   ];
@@ -98,7 +109,10 @@ const App = ({ astarteUrl, realm, deviceId, token }: AppProps) => {
       {!dataFetching && (
         <>
           <TopBar
-            title="Quality inspection"
+            title={intl.formatMessage({
+              id: "topBar.qualityInspection",
+              defaultMessage: "Quality inspection",
+            })}
             selectedRange={selectedRange}
             isDisabled={dataFetching}
             onRangeChange={setSelectedRange}
